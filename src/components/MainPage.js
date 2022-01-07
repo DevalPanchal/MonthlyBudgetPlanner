@@ -27,11 +27,11 @@ export default function MainPage() {
      const [chartDataset, setChartDataset] = useState([]);
 
      const data = {
-          labels: chartLabels,
+          labels: chartLabels.map((item) => item.type),
           datasets: [
                {
                     label: '# of Votes',
-                    data: chartDataset,
+                    data: chartDataset.map((item) => item.amount),
                     backgroundColor: [
                          'rgba(255, 99, 132, 0.5)',
                          'rgba(54, 162, 235, 0.5)',
@@ -39,6 +39,9 @@ export default function MainPage() {
                          'rgba(75, 192, 192, 0.5)',
                          'rgba(153, 102, 255, 0.5)',
                          'rgba(255, 159, 64, 0.5)',
+                         'rgba(255, 219, 64, 0.5)',
+                         'rgba(50, 159, 64, 0.5)',
+                         'rgba(70, 159, 64, 0.5)',
                     ],
                     borderColor: [
                          'black',
@@ -50,33 +53,46 @@ export default function MainPage() {
 
      const handleExpenseSubmit = (e) => {
           e.preventDefault();
-          let newObj = { id: inputs.length, type: expenseType, amount: inputExpense };
-          setInputs([...inputs, newObj]);
-          setExpenseType("");
-          setInputExpense("");
-          setExpenseAmount(parseInt(inputExpense) + expenseAmount);
-          setChartLabels([...chartLabels, expenseType]);
-          setChartDataset([...chartDataset, inputExpense]);
+          if ((inputBudget && inputExpense) > 0) {
+               let newObj = { id: inputs.length, type: expenseType, amount: inputExpense };
+               setInputs([...inputs, newObj]);
+               setExpenseType("");
+               setInputExpense("");
+               setExpenseAmount(parseInt(inputExpense) + expenseAmount);
+               setChartLabels([...chartLabels, newObj]);
+               setChartDataset([...chartDataset, newObj]);
+          } else {
+               console.error("Need an Input");
+          }
      }
 
      const handleBudgetSubmit = (e) => {
           e.preventDefault();
-          let newObj = { id: budgets.length, type: budgetType, amount: inputBudget };
-          setBudgets([...budgets, newObj]);
-          setBudgetType("");
-          setInputBudget("");
-          setBudget(parseInt(inputBudget) + budget);
-          setChartLabels([...chartLabels, budgetType]);
-          setChartDataset([...chartDataset, inputBudget]);
+          if ((inputBudget && inputExpense) > 0) {
+               let newObj = { id: budgets.length, type: budgetType, amount: inputBudget };
+               setBudgets([...budgets, newObj]);
+               setBudgetType("");
+               setInputBudget("");
+               setBudget(parseInt(inputBudget) + budget);
+               setChartLabels([...chartLabels, newObj]);
+               setChartDataset([...chartDataset, newObj]);
+          } else {
+               console.error("Need an Input")
+          }
      }
 
      const removeItem = (item) => {
           setInputs(inputs.filter(element => element.id !== item.id));
+          setExpenseAmount(expenseAmount - parseInt(item.amount));
+          setChartLabels(chartLabels.filter(element => element.id !== item.id));
+          setChartDataset(chartDataset.filter(element => element.id !== item.id));
      }
 
      const removeBudget = (item) => {
           setBudgets(budgets.filter(element => element.id !== item.id));
           setBudget(budget - parseInt(item.amount));
+          setChartLabels(chartLabels.filter(element => element.id !== item.id));
+          setChartDataset(chartDataset.filter(element => element.id !== item.id));
      }
 
      return ( 
@@ -90,7 +106,10 @@ export default function MainPage() {
                     </div>
                </div>
                <div className="right-pane-container">
-                    <h1 className="title">My Monthly Budget Planner</h1>
+                    <div className="title-container">
+                         <h1 className="title">My Monthly Budget Planner</h1>
+                         <button className="save-btn">Save</button>
+                    </div>
                     <div className="statistics-container">
                          <Statistics title={"Budget"} amount={ budget } />
                          <Statistics title={"Remaining"} amount={ budget - expenseAmount } />

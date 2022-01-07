@@ -49,16 +49,38 @@
   box-shadow: 0 0 2px 1px black;
 }
 
-
 .right-pane-container {
   height: 100%;
   width: 55%;
 }
 
-.title {
+.right-pane-container .title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.right-pane-container .title-container .save-btn {
+  width: 20%;
+  padding: 7px;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--primary-app-blue);
+  color: #fff;
+  transition: 0.1s;
+}
+
+.right-pane-container .title-container .save-btn:hover {
+  cursor: pointer;
+  background-color: var(--primary-app-hover-blue);
+}
+
+/* .title {
   padding: 10px;
   font-size: 25px;
-}
+} */
 
 .statistics-container {
   padding: 10px;
