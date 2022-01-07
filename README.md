@@ -8,7 +8,6 @@ This is a side project made for learning purposes as well as personal use for ba
 
 ## Changelogs
 - version 1.0.0
-<br>
      - Added basic CRUD operations for inputting budget and expenses
      - A doughnut chart on the left is added, and updates as user is entering their budgets and expenses
 - version 1.1.0 (future)
