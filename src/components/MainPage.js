@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { List } from './List';
 import { Statistics } from './Statistics';
 
 // import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
+import { print } from '../utility/print';
 
 export default function MainPage() {
      // user input state
@@ -51,9 +52,19 @@ export default function MainPage() {
           ],
      };
 
+     const handleSave = (e) => {
+          e.preventDefault();
+          localStorage.setItem("budgets", JSON.stringify(budgets));
+          localStorage.setItem("inputs", JSON.stringify(inputs));
+          localStorage.setItem("budget", budget);
+          localStorage.setItem("expenseAmount", JSON.stringify(expenseAmount));
+          localStorage.setItem("chartLabels", JSON.stringify(chartLabels));
+          localStorage.setItem("chartDataset", JSON.stringify(chartDataset));
+     }
+
      const handleExpenseSubmit = (e) => {
           e.preventDefault();
-          if ((inputBudget && inputExpense) > 0) {
+          if ((inputExpense.length && expenseType.length) > 0) {
                let newObj = { id: inputs.length, type: expenseType, amount: inputExpense };
                setInputs([...inputs, newObj]);
                setExpenseType("");
@@ -68,7 +79,7 @@ export default function MainPage() {
 
      const handleBudgetSubmit = (e) => {
           e.preventDefault();
-          if ((inputBudget && inputExpense) > 0) {
+          if ((inputBudget.length && budgetType.length) > 0) {
                let newObj = { id: budgets.length, type: budgetType, amount: inputBudget };
                setBudgets([...budgets, newObj]);
                setBudgetType("");
@@ -95,6 +106,15 @@ export default function MainPage() {
           setChartDataset(chartDataset.filter(element => element.id !== item.id));
      }
 
+     useEffect(() => {
+          if (localStorage.budget) print(budget);
+          if (localStorage.budgets) print(JSON.parse(localStorage.budgets));
+          if (localStorage.inputs) print(JSON.parse(localStorage.inputs));
+          if (localStorage.expenseAmount) print(localStorage.expenseAmount);
+          if (localStorage.chartDataset) print(JSON.parse(localStorage.chartDataset));
+          if (localStorage.chartLabels) print(JSON.parse(localStorage.chartLabels));
+     }, []);
+
      return ( 
           <div className="main-container">
                <div className="left-pane-container">
@@ -108,7 +128,7 @@ export default function MainPage() {
                <div className="right-pane-container">
                     <div className="title-container">
                          <h1 className="title">My Monthly Budget Planner</h1>
-                         <button className="save-btn">Save</button>
+                         <button className="save-btn" onClick={ handleSave }>Save</button>
                     </div>
                     <div className="statistics-container">
                          <Statistics title={"Budget"} amount={ budget } />

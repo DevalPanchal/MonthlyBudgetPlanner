@@ -65,7 +65,7 @@
   width: 20%;
   padding: 7px;
   font-size: 15px;
-  border: none;
+  border: 2px solid var(--primary-app-blue);
   border-radius: 10px;
   background-color: var(--primary-app-blue);
   color: #fff;
@@ -74,7 +74,8 @@
 
 .right-pane-container .title-container .save-btn:hover {
   cursor: pointer;
-  background-color: var(--primary-app-hover-blue);
+  color: var(--primary-app-blue);
+  background-color: transparent;
 }
 
 /* .title {
@@ -128,7 +129,7 @@
   width: 20%;
   padding: 7px;
   font-size: 15px;
-  border: none;
+  border: 2px solid var(--primary-app-blue);
   border-radius: 10px;
   background-color: var(--primary-app-blue);
   color: #fff;
@@ -137,7 +138,8 @@
 
 .form-container .input-container .submit-btn:hover {
   cursor: pointer;
-  background-color: var(--primary-app-hover-blue);
+  color: var(--primary-app-blue);
+  background-color: transparent;
 }
 
 .list-container {
