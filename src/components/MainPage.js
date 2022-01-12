@@ -107,7 +107,7 @@ export default function MainPage() {
      }
 
      useEffect(() => {
-          if (localStorage.budget) print(budget);
+          if (localStorage.budget) print(JSON.parse(localStorage.budget));
           if (localStorage.budgets) print(JSON.parse(localStorage.budgets));
           if (localStorage.inputs) print(JSON.parse(localStorage.inputs));
           if (localStorage.expenseAmount) print(localStorage.expenseAmount);
@@ -117,11 +117,24 @@ export default function MainPage() {
 
      return ( 
           <div className="main-container">
-               <div className="left-pane-container">
+               <div className={ chartLabels.length > 0 ? "left-pane-container" : "left-pane-empty-container"}>
                     <div className="current-statistics">
                          <h2 className="title">Current Statistics</h2>
                          <div className={chartLabels.length > 0 ? "plot-container" : ""}>
                               <Doughnut data={data} />
+                         </div>
+                         <div className="yearly-statistics">
+                              <h3>Yearly Statistics</h3>
+                              <ul className="statistics-container">
+                                   <li>
+                                        <p>Estimated Yearly Income</p>
+                                        <p>~ ${ budget * 12 }</p>
+                                   </li>
+                                   <li>
+                                        <p>Estimated Yearly Expense</p>
+                                        <p>~ ${ expenseAmount * 12 }</p>
+                                   </li>
+                              </ul>
                          </div>
                     </div>
                </div>

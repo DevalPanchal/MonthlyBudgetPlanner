@@ -15,10 +15,16 @@
 }
 
 .main-container {
+  position: relative;
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.644), rgba(0, 0, 0, 0.644)), url("background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #adadad86;
 }
 
 .left-pane-container {
@@ -29,6 +35,12 @@
   flex-direction: column;
   width: 45%;
   background-color: var(--primary-app-blue);
+  transition: 0.2s;
+}
+
+.left-pane-empty-container {
+  width: 0%;
+  transition: 0.2s;
 }
 
 .left-pane-container > div {
@@ -36,6 +48,11 @@
   height: 100%;
   /* border: 1px dashed greenyellow; */
   text-align: center;
+}
+
+.left-pane-container .current-statistics .title {
+  color: #fff;
+  padding: 10px;
 }
 
 .left-pane-container .current-statistics .plot-container {
@@ -49,9 +66,27 @@
   box-shadow: 0 0 2px 1px black;
 }
 
+.left-pane-container .yearly-statistics {
+  padding: 5px;
+  margin: 15px;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.left-pane-container .yearly-statistics .statistics-container {
+  
+  width: 100%;
+  border: 1px solid black;
+}
+
 .right-pane-container {
+  margin: 0 auto;
   height: 100%;
   width: 55%;
+  box-shadow: 0 0 2px 2px#000;
+  background-color: #fff;
+  z-index: 2;
 }
 
 .right-pane-container .title-container {
