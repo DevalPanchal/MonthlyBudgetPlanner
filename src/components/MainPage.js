@@ -5,7 +5,7 @@ import { Statistics } from './Statistics';
 // import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
-import { print } from '../utility/print';
+// import { print } from '../utility/print';
 
 export default function MainPage() {
      // user input state
@@ -26,6 +26,8 @@ export default function MainPage() {
      // chart data structures
      const [chartLabels, setChartLabels] = useState([]);
      const [chartDataset, setChartDataset] = useState([]);
+
+     
 
      const data = {
           labels: chartLabels.map((item) => item.type),
@@ -61,6 +63,19 @@ export default function MainPage() {
           localStorage.setItem("chartLabels", JSON.stringify(chartLabels));
           localStorage.setItem("chartDataset", JSON.stringify(chartDataset));
      }
+
+     const handleDelete = (e) => {
+          e.preventDefault();
+          localStorage.clear();
+          setBudget(0);
+          setInputBudget("");
+          setInputs([]);
+          setBudgets([]);
+          setExpenseAmount(0);
+          setChartLabels([]);
+          setChartDataset([]);
+     }
+     
 
      const handleExpenseSubmit = (e) => {
           e.preventDefault();
@@ -107,12 +122,12 @@ export default function MainPage() {
      }
 
      useEffect(() => {
-          if (localStorage.budget) print(JSON.parse(localStorage.budget));
-          if (localStorage.budgets) print(JSON.parse(localStorage.budgets));
-          if (localStorage.inputs) print(JSON.parse(localStorage.inputs));
-          if (localStorage.expenseAmount) print(localStorage.expenseAmount);
-          if (localStorage.chartDataset) print(JSON.parse(localStorage.chartDataset));
-          if (localStorage.chartLabels) print(JSON.parse(localStorage.chartLabels));
+          if (localStorage.budget) setBudget(JSON.parse(localStorage.budget));
+          if (localStorage.budgets) setBudgets(JSON.parse(localStorage.budgets));
+          if (localStorage.inputs) setInputs(JSON.parse(localStorage.inputs));
+          if (localStorage.expenseAmount) setExpenseAmount(localStorage.expenseAmount);
+          if (localStorage.chartDataset) setChartDataset(JSON.parse(localStorage.chartDataset));
+          if (localStorage.chartLabels) setChartLabels(JSON.parse(localStorage.chartLabels));
      }, []);
 
      return ( 
@@ -141,7 +156,8 @@ export default function MainPage() {
                <div className="right-pane-container">
                     <div className="title-container">
                          <h1 className="title">My Monthly Budget Planner</h1>
-                         <button className="save-btn" onClick={ handleSave }>Save</button>
+                         { chartLabels.length > 0 && (<button className="save-btn" onClick={ handleSave }>Save</button>)}
+                         { chartLabels.length > 0 && (<button className="delete-btn" onClick={ handleDelete }>Remove Info</button>)}
                     </div>
                     <div className="statistics-container">
                          <Statistics title={"Budget"} amount={ budget } />

@@ -70,14 +70,11 @@
   padding: 5px;
   margin: 15px;
   background-color: #fff;
-  border: 1px solid black;
   border-radius: 5px;
 }
 
 .left-pane-container .yearly-statistics .statistics-container {
-  
   width: 100%;
-  border: 1px solid black;
 }
 
 .right-pane-container {
@@ -113,10 +110,27 @@
   background-color: transparent;
 }
 
-/* .title {
+.right-pane-container .title-container .delete-btn {
+  width: 20%;
+  padding: 7px;
+  font-size: 15px;
+  border: 2px solid var(--primary-app-danger-red);
+  border-radius: 10px;
+  background-color: var(--primary-app-danger-red);
+  color: #fff;
+  transition: 0.1s;
+}
+
+.right-pane-container .title-container .delete-btn:hover {
+  cursor: pointer;
+  color: var(--primary-app-danger-red);
+  background-color: transparent;
+}
+
+.title {
   padding: 10px;
   font-size: 25px;
-} */
+}
 
 .statistics-container {
   padding: 10px;
