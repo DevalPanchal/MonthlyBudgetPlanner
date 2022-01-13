@@ -14,3 +14,4 @@ This is a side project made for learning purposes as well as personal use for ba
      - Add a save function, to save information to localstorage (later to be implemented using a server and database)
      - Update left-panel dashboard to display more items on the display
      - Add editable amount for budget and expense
+     - Make mobile-friendly UI

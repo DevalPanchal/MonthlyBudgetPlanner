@@ -76,7 +76,6 @@ export default function MainPage() {
           setChartDataset([]);
      }
      
-
      const handleExpenseSubmit = (e) => {
           e.preventDefault();
           if ((inputExpense.length && expenseType.length) > 0) {
