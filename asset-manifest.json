@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/MonthlyBudgetPlanner/static/css/main.2f0ac959.css",
+    "main.js": "/MonthlyBudgetPlanner/static/js/main.4081cea6.js",
+    "static/media/background.jpg": "/MonthlyBudgetPlanner/static/media/background.14768355b4a5d626f215.jpg",
+    "index.html": "/MonthlyBudgetPlanner/index.html",
+    "main.2f0ac959.css.map": "/MonthlyBudgetPlanner/static/css/main.2f0ac959.css.map",
+    "main.4081cea6.js.map": "/MonthlyBudgetPlanner/static/js/main.4081cea6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2f0ac959.css",
+    "static/js/main.4081cea6.js"
+  ]
+}
